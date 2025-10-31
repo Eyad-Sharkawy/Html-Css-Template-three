@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+ul {
+  list-style: none;
+}
+
+// Apply project font from CSS custom property
+body {
+  font-family: var(--main-font);
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+}

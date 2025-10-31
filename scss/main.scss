@@ -1,0 +1,14 @@
+@import "helpers/variables";
+@import "helpers/global";
+
+:root {
+  --main-color: #{$main-color};
+  --main-color-alt: #{$main-color-alt};
+  --main-transition: #{$main-transition};
+  --main-padding-top: #{$main-padding-top};
+  --main-padding-bottom: #{$main-padding-bottom};
+  --section-background: #{$section-background};
+  --main-font: #{$main-font};
+}
+
+
