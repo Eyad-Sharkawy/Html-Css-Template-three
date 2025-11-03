@@ -1,45 +1,118 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsive design -->
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Nova - Modern website template">
+    
     <title>Nova</title>
+    
+    <!-- Google Fonts: Preconnect for performance optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <!-- CSS is imported via js/index.js for Vite -->
 </head>
 <body>
-<nav>
-    <a href="index.html">Nova</a>
-    <ul>
-        <li><a href="#articles">Articles</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#other-links">Other Links</a></li>
-    </ul>
-    <div class="hamburger">
-        <div class="image">
-            <img src="media/images/megamenu.png" alt="menu-img">
+    <!-- Main Navigation Bar -->
+    <nav role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <!-- Logo/Brand Name -->
+            <a href="#" class="logo" aria-label="Nova Home">Nova</a>
+            
+            <!-- Primary Navigation Menu -->
+            <ul class="menu" role="menubar">
+                <li role="none"><a href="#articles" role="menuitem">Articles</a></li>
+                <li role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
+                <li role="none"><a href="#features" role="menuitem">Features</a></li>
+                <!-- Dropdown trigger button - opens hamburger menu when clicked -->
+                <li class="other-links" role="none">
+                    <a href="#" role="menuitem" aria-expanded="false" aria-haspopup="true">Other Links</a>
+                </li>
+            </ul>
+            
+            <!-- Hamburger Dropdown Menu (hidden by default, shown when "Other Links" is clicked) -->
+            <div class="hamburger" role="menu" aria-label="Additional navigation links">
+                <!-- Menu Illustration Image (hidden on screens smaller than 992px) -->
+                <div class="image">
+                    <img src="media/images/megamenu.png" alt="Navigation menu illustration">
+                </div>
+                
+                <!-- First Column of Navigation Links -->
+                <ul role="list">
+                    <li class="nav-links" role="none">
+                        <a href="#testimonials" role="menuitem">
+                            <i class="far fa-comments fa-fw" aria-hidden="true"></i>
+                            <span>Testimonials</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#team-members" role="menuitem">
+                            <i class="far fa-user fa-fw" aria-hidden="true"></i>
+                            <span>Team Members</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#services" role="menuitem">
+                            <i class="far fa-building fa-fw" aria-hidden="true"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#our-skills" role="menuitem">
+                            <i class="far fa-check-circle fa-fw" aria-hidden="true"></i>
+                            <span>Our Skills</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#how-it-works" role="menuitem">
+                            <i class="far fa-clipboard fa-fw" aria-hidden="true"></i>
+                            <span>How it Works</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Second Column of Navigation Links -->
+                <ul role="list">
+                    <li class="nav-links" role="none">
+                        <a href="#events" role="menuitem">
+                            <i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>
+                            <span>Events</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#pricing-plans" role="menuitem">
+                            <i class="fas fa-server fa-fw" aria-hidden="true"></i>
+                            <span>Pricing Plans</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#top-videos" role="menuitem">
+                            <i class="far fa-play-circle fa-fw" aria-hidden="true"></i>
+                            <span>Top Videos</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#stats" role="menuitem">
+                            <i class="far fa-chart-bar fa-fw" aria-hidden="true"></i>
+                            <span>Stats</span>
+                        </a>
+                    </li>
+                    <li class="nav-links" role="none">
+                        <a href="#request-a-discount" role="menuitem">
+                            <i class="fas fa-percent fa-fw" aria-hidden="true"></i>
+                            <span>Request a Discount</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <ul>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="team-members">Team Members</a></li>
-            <li><a href="services">Services</a></li>
-            <li><a href="our-skills">Our Skills</a></li>
-            <li><a href="how-it-works">How it Works</a></li>
-        </ul>
-        <ul>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#pricing-plans">Pricing Plans</a></li>
-            <li><a href="#top-videos">Top Videos</a></li>
-            <li><a href="stats">Stats</a></li>
-            <li><a href="request-a-discount">Request a Discount</a></li>
-        </ul>
-    </div>
-</nav>
-<script type="module" src="/js/index.js"></script>
+    </nav>
+    
+    <!-- Main JavaScript entry point (Vite module) -->
+    <script type="module" src="/js/index.js"></script>
 </body>
 </html>

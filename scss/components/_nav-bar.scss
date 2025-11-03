@@ -1,0 +1,197 @@
+// ============================================================================
+// Navigation Bar Component
+// ============================================================================
+
+nav {
+  background-color: #ffffff;
+  position: sticky; // Sticks to top when scrolling
+  top: 0;
+  z-index: 1000; // Ensures nav stays above other content
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Subtle shadow when sticky
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; // Needed for absolute positioning of hamburger menu
+    
+    // Stack logo and menu vertically on mobile
+    @media (max-width: 767px) {
+      flex-flow: column;
+    }
+
+    // Logo/Brand Styling
+    .logo {
+      color: var(--main-color);
+      font-size: 1.625rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    // Primary Navigation Menu
+    .menu {
+      display: flex;
+
+      li {
+        font-size: var(--nav-bar-font);
+        position: relative; // Needed for ::before pseudo-element
+        display: flex;
+        align-items: center;
+
+        // Smaller font size on mobile devices
+        @media (max-width: 767px) {
+          font-size: 0.875rem;
+        }
+
+        // Animated top border indicator (appears on hover/active)
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: var(--main-color);
+          width: 0; // Starts at 0, animates to full width on hover
+          height: 4px;
+          transition: var(--main-transition);
+        }
+
+        // Hover and active states
+        &:hover,
+        &.active {
+          background-color: #fafafa;
+
+          // Expand the top border indicator to full width
+          &::before {
+            width: 100%;
+          }
+
+          // Change link color to main color
+          a {
+            color: var(--main-color);
+          }
+        }
+
+        // Menu Link Styling
+        a {
+          display: block;
+          text-decoration: none;
+          color: #000000;
+          transition: var(--main-transition);
+          padding: 1.6rem 1.875rem;
+
+          // Reduced padding on mobile for compact layout
+          @media (max-width: 767px) {
+            padding: 0.625rem;
+          }
+        }
+      }
+    }
+
+    // Hamburger Dropdown Menu (mega menu)
+    .hamburger {
+      position: absolute;
+      visibility: hidden; // Hidden by default (better than display: none for transitions)
+      display: flex;
+      top: calc(100% + 2.5rem); // Position below nav bar with gap
+      width: 100%;
+      gap: 2.5rem; // Space between image and menu columns
+      padding: 1.875rem;
+      background-color: #ffffff;
+      border-top: 1px solid #e9e6e6;
+      border-bottom: 3px solid var(--main-color);
+      transition: var(--main-transition);
+
+      // Mobile-specific styles
+      @media (max-width: 767px) {
+        padding: 0.625rem;
+        flex-flow: column; // Stack items vertically
+        gap: 0; // Remove gap between columns on mobile
+        
+        // Break out of container to span full viewport width
+        // Technique: use viewport width with calculated margin to center
+        left: 0;
+        right: 0;
+        width: 100vw; // Full viewport width
+        margin-left: calc(-50vw + 50%); // Centers element relative to viewport
+      }
+
+      // Active state: menu is visible
+      &.active {
+        visibility: visible;
+        top: 100%; // Slide down to align with nav bar bottom
+      }
+
+      // Menu Illustration Image
+      .image {
+        img {
+          max-width: 100%;
+          height: auto; // Maintain aspect ratio
+        }
+
+        // Hide image on tablets and smaller screens
+        @media (max-width: 991px) {
+          display: none;
+        }
+      }
+
+      // Menu Columns (two columns of navigation links)
+      ul {
+        flex: 1; // Equal width columns
+        display: flex;
+        flex-flow: column;
+        min-width: 250px; // Minimum width for desktop
+
+        // Add border between menu columns on mobile
+        @media (max-width: 767px) {
+          &:not(:first-of-type) {
+            border-top: 1px solid #e9e6e6; // Separator between first and second column
+          }
+        }
+
+        // Individual Menu Item
+        li {
+          position: relative; // Needed for ::before pseudo-element
+          padding: 1rem;
+          font-size: var(--nav-bar-font);
+          font-weight: bold;
+          border-bottom: 1px solid #e9e6e6; // Separator between items
+
+          // Remove border from last item in each column
+          &:last-child {
+            border-bottom: none;
+          }
+
+          // Link Styling
+          a {
+            display: block;
+            color: var(--main-color);
+            text-decoration: none;
+            position: relative;
+
+            // Icon spacing
+            i {
+              margin-right: 1rem;
+            }
+          }
+
+          // Hover background effect (slides in from left)
+          &::before {
+            content: "";
+            position: absolute;
+            width: 0; // Starts at 0
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #fafafa;
+            transition: var(--main-transition);
+          }
+
+          // Expand background on hover
+          &:hover::before {
+            width: 100%; // Expands to full width
+          }
+        }
+      }
+    }
+  }
+}

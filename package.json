@@ -15,6 +15,7 @@
     "vite": "^7.1.12"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "modern-normalize": "^2.0.0"
   }
 }

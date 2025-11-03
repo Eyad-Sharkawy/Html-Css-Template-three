@@ -1,5 +1,6 @@
 @use "./helpers/variables" as *;
 @use "./helpers/global";
+@use "./components/nav-bar";
 
 :root {
   --main-color: #{$main-color};
@@ -9,6 +10,6 @@
   --main-padding-bottom: #{$main-padding-bottom};
   --section-background: #{$section-background};
   --main-font: #{$main-font};
+  --nav-bar-font: #{$nav-bar-font};
 }
 
-@use "./components/nav-bar";
