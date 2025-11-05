@@ -1,6 +1,7 @@
 @use "./helpers/variables" as *;
 @use "./helpers/global";
 @use "./components/nav-bar";
+@use "./components/landing-page";
 
 :root {
   --main-color: #{$main-color};

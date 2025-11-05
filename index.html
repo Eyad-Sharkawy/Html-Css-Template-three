@@ -17,57 +17,65 @@
     <!-- CSS is imported via js/index.js for Vite -->
 </head>
 <body>
+    <!-- Skip to main content link (accessibility) -->
+    <!-- Hidden until focused, allows keyboard users to skip navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Main Navigation Bar -->
-    <nav role="navigation" aria-label="Main navigation">
-        <div class="container">
+    <nav class="nav-bar" role="navigation" aria-label="Main navigation">
+        <div class="nav-bar__container container">
             <!-- Logo/Brand Name -->
-            <a href="#" class="logo" aria-label="Nova Home">Nova</a>
+            <a href="#" class="nav-bar__logo" aria-label="Nova Home">Nova</a>
             
             <!-- Primary Navigation Menu -->
-            <ul class="menu" role="menubar">
-                <li role="none"><a href="#articles" role="menuitem">Articles</a></li>
-                <li role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
-                <li role="none"><a href="#features" role="menuitem">Features</a></li>
+            <ul class="nav-bar__menu" role="menubar">
+                <li class="nav-bar__nav-link" role="none"><a href="#articles" role="menuitem">Articles</a></li>
+                <li class="nav-bar__nav-link" role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
+                <li class="nav-bar__nav-link" role="none"><a href="#features" role="menuitem">Features</a></li>
                 <!-- Dropdown trigger button - opens hamburger menu when clicked -->
-                <li class="other-links" role="none">
+                <li class="nav-bar__nav-link nav-bar__other-links" role="none">
                     <a href="#" role="menuitem" aria-expanded="false" aria-haspopup="true">Other Links</a>
                 </li>
             </ul>
             
             <!-- Hamburger Dropdown Menu (hidden by default, shown when "Other Links" is clicked) -->
-            <div class="hamburger" role="menu" aria-label="Additional navigation links">
+            <div class="nav-bar__hamburger" role="menu" aria-label="Additional navigation links">
                 <!-- Menu Illustration Image (hidden on screens smaller than 992px) -->
-                <div class="image">
-                    <img src="media/images/megamenu.png" alt="Navigation menu illustration">
+                <div class="nav-bar__hamburger__image">
+                    <img 
+                        src="media/images/megamenu.png" 
+                        alt="Decorative illustration for navigation menu" 
+                        width="400" 
+                        height="300"
+                        loading="lazy">
                 </div>
                 
                 <!-- First Column of Navigation Links -->
                 <ul role="list">
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#testimonials" role="menuitem">
                             <i class="far fa-comments fa-fw" aria-hidden="true"></i>
                             <span>Testimonials</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#team-members" role="menuitem">
                             <i class="far fa-user fa-fw" aria-hidden="true"></i>
                             <span>Team Members</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#services" role="menuitem">
                             <i class="far fa-building fa-fw" aria-hidden="true"></i>
                             <span>Services</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#our-skills" role="menuitem">
                             <i class="far fa-check-circle fa-fw" aria-hidden="true"></i>
                             <span>Our Skills</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#how-it-works" role="menuitem">
                             <i class="far fa-clipboard fa-fw" aria-hidden="true"></i>
                             <span>How it Works</span>
@@ -77,31 +85,31 @@
                 
                 <!-- Second Column of Navigation Links -->
                 <ul role="list">
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#events" role="menuitem">
                             <i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>
                             <span>Events</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#pricing-plans" role="menuitem">
                             <i class="fas fa-server fa-fw" aria-hidden="true"></i>
                             <span>Pricing Plans</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#top-videos" role="menuitem">
                             <i class="far fa-play-circle fa-fw" aria-hidden="true"></i>
                             <span>Top Videos</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#stats" role="menuitem">
                             <i class="far fa-chart-bar fa-fw" aria-hidden="true"></i>
                             <span>Stats</span>
                         </a>
                     </li>
-                    <li class="nav-links" role="none">
+                    <li class="nav-bar__hamburger-link" role="none">
                         <a href="#request-a-discount" role="menuitem">
                             <i class="fas fa-percent fa-fw" aria-hidden="true"></i>
                             <span>Request a Discount</span>
@@ -111,6 +119,61 @@
             </div>
         </div>
     </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- ====================================================================
+             Landing Page / Hero Section
+             ====================================================================
+             Full-viewport hero section that serves as the first impression.
+             Features:
+             - Takes 100% viewport height (100vh/100dvh)
+             - Skewed diagonal background transition effect (via ::before)
+             - Floating image animation
+             - Scroll indicator with bounce animation
+             - Fully responsive (image hidden on mobile)
+             - Nav bar overlays on top (fixed position)
+        -->
+        <section class="landing-page">
+            <!-- Container: Centers content and applies responsive width constraints -->
+            <!-- Uses both BEM class (landing-page__container) and utility class (container) -->
+            <div class="landing-page__container container">
+                
+                <!-- Text Content Block -->
+                <!-- Contains the main heading and description -->
+                <div class="landing-page__text">
+                    <!-- Main Heading: Welcome message/title -->
+                    <h1 class="landing-page__heading">Welcome, To Nova</h1>
+                    
+                    <!-- Description: Subtitle explaining the site's purpose -->
+                    <p class="landing-page__description">
+                        Here I am going to share everything about my life. Books I am reading, Games I am Playing, Stories and Events
+                    </p>
+                </div>
+                
+                <!-- Image Container -->
+                <!-- Contains the landing page illustration with floating animation -->
+                <!-- Hidden on mobile devices (max-width: 767px) -->
+                <div class="landing-page__image">
+                    <img 
+                        src="media/images/landing-image.png" 
+                        alt="Illustration representing Nova website - a modern, creative design" 
+                        width="600" 
+                        height="600"
+                        loading="eager"
+                        fetchpriority="high">
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator Arrow -->
+            <!-- Centered arrow at bottom that bounces to indicate scrollable content -->
+            <!-- Links to #articles section (next section) -->
+            <!-- Uses Font Awesome double-down arrow icon with bounce animation -->
+            <a href="#articles" aria-label="Go to Articles section" class="landing-page__scroll-arrow">
+                <i class="fas fa-angle-double-down fa-2x" aria-hidden="true"></i>
+            </a>
+        </section>
+    </main>
     
     <!-- Main JavaScript entry point (Vite module) -->
     <script type="module" src="/js/index.js"></script>

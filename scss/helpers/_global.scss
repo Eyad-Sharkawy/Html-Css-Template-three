@@ -1,3 +1,8 @@
+// ============================================================================
+// Global Styles
+// ============================================================================
+
+// Universal Reset
 *,
 *::before,
 *::after {
@@ -6,20 +11,44 @@
   margin: 0;
 }
 
+// Base HTML & Body Styles
 html,
 body {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
+// Remove default list styling
 ul {
   list-style: none;
 }
 
+// Base body typography
 body {
   font-family: var(--main-font);
 }
 
+// Skip to main content link (accessibility)
+// Hidden by default, visible when focused (keyboard navigation)
+.skip-link {
+  position: absolute;
+  top: -100px; // Hide off-screen
+  left: 0;
+  background-color: var(--main-color);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  z-index: 10000; // Above everything
+  font-weight: bold;
+  transition: top 0.3s ease;
+
+  // Show when focused (keyboard navigation)
+  &:focus {
+    top: 0;
+  }
+}
+
+// Container utility class (for direct use in HTML)
 .container {
   padding-left: 15px;
   padding-right: 15px;

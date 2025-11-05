@@ -12,9 +12,9 @@ import '../scss/main.scss';
 // Wait for DOM to be fully loaded before executing navigation logic
 document.addEventListener('DOMContentLoaded', () => {
   // Get references to navigation elements
-  const dropDownBtn = document.querySelector('.other-links'); // Button that toggles hamburger menu
-  const hamburgerMenu = document.querySelector('.hamburger'); // The dropdown menu container
-  const navList = document.querySelectorAll('.nav-links'); // All navigation links inside hamburger menu
+  const dropDownBtn = document.querySelector('.nav-bar__other-links'); // Button that toggles hamburger menu
+  const hamburgerMenu = document.querySelector('.nav-bar__hamburger'); // The dropdown menu container
+  const navList = document.querySelectorAll('.nav-bar__hamburger-link'); // All navigation links inside hamburger menu
 
   // Check if elements exist before adding event listeners
   // Prevents errors if elements are missing from DOM
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================================================
   dropDownBtn.addEventListener('click', (e) => {
     e.preventDefault(); // Prevent default anchor behavior (prevents page jump to #)
-    hamburgerMenu.classList.toggle('active'); // Toggle visibility of hamburger menu
-    dropDownBtn.classList.toggle('active'); // Toggle active state on button
+    hamburgerMenu.classList.toggle('nav-bar__hamburger--active'); // Toggle visibility of hamburger menu
+    dropDownBtn.classList.toggle('nav-bar__nav-link--active'); // Toggle active state on button
   });
 
   // ========================================================================
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================================================
   document.addEventListener('click', (e) => {
     // Only proceed if menu is currently open
-    if (!hamburgerMenu.classList.contains('active')) return;
+    if (!hamburgerMenu.classList.contains('nav-bar__hamburger--active')) return;
 
     // Check if click is inside the hamburger menu
     const isClickInsideMenu = hamburgerMenu.contains(e.target);
@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close menu if click is outside both menu and button
     if (!isClickInsideMenu && !isClickOnButton) {
-      hamburgerMenu.classList.remove('active');
-      dropDownBtn.classList.remove('active');
+      hamburgerMenu.classList.remove('nav-bar__hamburger--active');
+      dropDownBtn.classList.remove('nav-bar__nav-link--active');
     }
   });
 
@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // This provides better UX - menu closes after user selects a link
   navList.forEach((link) => {
     link.addEventListener('click', () => {
-      hamburgerMenu.classList.remove('active');
-      dropDownBtn.classList.remove('active');
+      hamburgerMenu.classList.remove('nav-bar__hamburger--active');
+      dropDownBtn.classList.remove('nav-bar__nav-link--active');
     });
   });
 
@@ -67,9 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================================================
   document.addEventListener('keydown', (e) => {
     // Only close if menu is open and Escape key is pressed
-    if (e.key === 'Escape' && hamburgerMenu.classList.contains('active')) {
-      hamburgerMenu.classList.remove('active');
-      dropDownBtn.classList.remove('active');
+    if (e.key === 'Escape' && hamburgerMenu.classList.contains('nav-bar__hamburger--active')) {
+      hamburgerMenu.classList.remove('nav-bar__hamburger--active');
+      dropDownBtn.classList.remove('nav-bar__nav-link--active');
     }
   });
 });
