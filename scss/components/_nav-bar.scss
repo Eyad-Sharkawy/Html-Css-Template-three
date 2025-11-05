@@ -140,7 +140,7 @@
 
     // Active state: menu is visible
     &--active {
-      visibility: visible;
+      visibility: visible !important;
       top: 100%; // Slide down to align with nav bar bottom
     }
 

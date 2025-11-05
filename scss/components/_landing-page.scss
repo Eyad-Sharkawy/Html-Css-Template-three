@@ -97,6 +97,8 @@
 
     img {
       max-width: 100%; // Responsive image sizing
+      height: auto; // Maintain aspect ratio (prevents stretching)
+      object-fit: contain; // Ensures image fits without distortion
       position: relative; // Required for animation transforms
       animation: hover 5s linear infinite; // Floating animation (defined below)
     }
