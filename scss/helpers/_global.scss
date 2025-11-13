@@ -2,6 +2,8 @@
 // Global Styles
 // ============================================================================
 
+@use "./mixins" as *;
+
 // Universal Reset
 *,
 *::before,
@@ -70,4 +72,12 @@ body {
   @media (min-width: 1200px) {
     max-width: 1140px;
   }
+}
+
+.header {
+  @include header;
+}
+
+.spikes {
+  @include spikes;
 }

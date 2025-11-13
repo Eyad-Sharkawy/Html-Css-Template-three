@@ -2,6 +2,7 @@
 @use "./helpers/global";
 @use "./components/nav-bar";
 @use "./components/landing-page";
+@use "./components/articles";
 
 :root {
   --main-color: #{$main-color};

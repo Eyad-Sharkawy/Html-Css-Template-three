@@ -1,0 +1,179 @@
+// ============================================================================
+// Articles Component Styles
+// ============================================================================
+// 
+// This component styles the articles section that displays a grid of article
+// cards. Each card contains an image, title, description, and a "Read More"
+// link with an animated arrow icon.
+//
+// Features:
+// - Responsive grid layout that adapts to different screen sizes
+// - Hover effects with smooth transitions
+// - Accessibility features (focus states, keyboard navigation)
+// - Animated arrow icon on hover
+// - Responsive gap spacing for optimal viewing on all devices
+//
+// Structure:
+// .articles
+//   ├── .articles__container
+//   ├── .articles__header (uses .header utility class)
+//   └── .articles__content
+//       └── .articles__article (repeated)
+//           ├── .articles__image
+//           ├── .articles__text
+//           └── .articles__info
+//
+// ============================================================================
+
+@use "../helpers/mixins" as *;
+
+.articles {
+  // Main section padding (top)
+  // Uses CSS variable for consistent spacing across sections
+  padding-top: var(--main-padding-top);
+
+  // Container wrapper
+  // Provides bottom padding to separate from next section
+  &__container {
+    padding-bottom: var(--main-padding-bottom);
+  }
+
+  // Grid container for article cards
+  // Uses CSS Grid with auto-fill for responsive layout
+  &__content {
+    display: grid;
+    // Auto-fill creates as many columns as can fit
+    // Each column has a minimum width of 200px and can grow to fill available space
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem; // Smaller gap on mobile for better space utilization
+
+    // Responsive gap adjustments
+    // Increases spacing on larger screens for better visual separation
+    @media (min-width: 768px) {
+      gap: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      gap: 2.5rem;
+    }
+  }
+
+  // Individual article card
+  // Contains image, text content, and read more link
+  &__article {
+    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+    border-radius: 6px;
+    overflow: hidden; // Ensures content respects border-radius
+    // Smooth transitions for transform and shadow on hover
+    transition: transform var(--main-transition), box-shadow var(--main-transition);
+    background-color: #ffffff; // Ensures white background
+
+    // Focus state for keyboard navigation
+    // Provides visual feedback when navigating with keyboard
+    &:focus-within {
+      outline: 2px solid var(--main-color);
+      outline-offset: 2px;
+    }
+
+    // Hover effects
+    // Lifts card and increases shadow for depth effect
+    &:hover {
+      transform: translateY(-10px); // Lifts card up
+      box-shadow: 0 2px 15px rgb(0 0 0 / 20%); // Stronger shadow for depth
+
+      // Animate arrow icon and change link color on hover
+      .articles__info {
+        i {
+          animation: moving-arrow 0.6s linear infinite;
+        }
+
+        a {
+          color: var(--main-color-alt); // Darker shade on hover
+        }
+      }
+    }
+  }
+
+  // Article image container
+  // Ensures images are responsive and properly displayed
+  &__image {
+    img {
+      max-width: 100%; // Prevents image overflow
+      height: auto; // Maintains aspect ratio
+      display: block; // Removes bottom spacing (inline-block default spacing)
+    }
+  }
+
+  // Text content area
+  // Contains article title and description
+  &__text {
+    padding: 1.25rem;
+
+    // Article title styling
+    h3 {
+      margin-bottom: 0.5rem;
+      color: #333; // Dark gray for good contrast
+      font-weight: 600; // Semi-bold for emphasis
+    }
+
+    // Article description/paragraph
+    p {
+      margin-top: 10px;
+      line-height: 1.5; // Comfortable reading line height
+      color: #777; // Lighter gray for secondary text
+    }
+  }
+
+  // Footer area with "Read More" link and arrow icon
+  // Separated from text content with a border
+  &__info {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between; // Link on left, icon on right
+    align-items: center; // Vertically centers content
+    color: var(--main-color); // Uses theme color
+    border-top: #e6e6e7 solid 1px; // Subtle separator line
+
+    // "Read More" link styling
+    a {
+      text-decoration: none;
+      color: var(--main-color);
+      font-weight: 600; // Makes link more prominent
+      transition: color var(--main-transition); // Smooth color transition
+      position: relative;
+
+      // Focus state for accessibility
+      // Provides visible outline for keyboard navigation
+      &:focus {
+        outline: 2px solid var(--main-color);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      // Hover state
+      // Changes to darker shade on hover
+      &:hover {
+        color: var(--main-color-alt);
+      }
+    }
+
+    // Arrow icon styling
+    // Smooth transition for any transform animations
+    i {
+      transition: transform var(--main-transition);
+    }
+  }
+}
+
+// ============================================================================
+// Animations
+// ============================================================================
+
+// Moving arrow animation
+// Used when article card is hovered
+// Creates a sliding effect for the arrow icon
+@keyframes moving-arrow {
+  100% {
+    transform: translateX(10px); // Moves arrow 10px to the right
+  }
+}
