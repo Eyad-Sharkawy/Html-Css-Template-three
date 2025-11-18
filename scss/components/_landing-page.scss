@@ -9,6 +9,9 @@
 // - Scroll indicator arrow with bounce animation
 // - Fully responsive design
 
+@use "../helpers/mixins" as *;
+@use "../helpers/variables" as *;
+
 .landing-page {
   // Full viewport height - takes 100% of screen from top
   min-height: 100vh; // Standard viewport height
@@ -29,7 +32,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #ececec; // Matches the next section's background color
+    background-color: var(--section-background); // Matches the next section's background color
     transform: skewY(-6deg); // Skews vertically by -6 degrees (tilts right)
     transform-origin: top left; // Anchor point for the transform (top-left corner)
     z-index: -1; // Ensures it stays behind the content
@@ -52,7 +55,7 @@
     flex: 1; // Takes available space in flex container
 
     // Center text on mobile devices for better readability
-    @media (max-width: 767px) {
+    @include mobile-only {
       text-align: center;
     }
   }
@@ -65,22 +68,22 @@
     margin: 0px; // Remove default margin
 
     // Smaller heading on mobile for better fit
-    @media (max-width: 767px) {
+    @include mobile-only {
       font-size: 1.75rem; // 28px equivalent
     }
   }
 
-  // Description Text
-  // Subtitle or description text below the heading
-  &__description {
-    font-size: 1.4375rem; // 23px equivalent
-    line-height: 1.7; // Comfortable line height for readability
-    color: rgb(102, 102, 102); // Muted gray color
-    max-width: 500px; // Limits width for better readability
-    margin: 5px 0px 0px; // Small top margin
+    // Description Text
+    // Subtitle or description text below the heading
+    &__description {
+      font-size: 1.4375rem; // 23px equivalent
+      line-height: 1.7; // Comfortable line height for readability
+      color: var(--text-muted); // Muted gray color
+      max-width: 500px; // Limits width for better readability
+      margin: 5px 0 0; // Small top margin
 
     // Smaller description text on mobile
-    @media (max-width: 767px) {
+    @include mobile-only {
       font-size: 1.125rem; // 18px equivalent
     }
   }
@@ -91,7 +94,7 @@
     flex: 1; // Takes available space in flex container
     
     // Hide image on mobile to save space and improve layout
-    @media (max-width: 767px) {
+    @include mobile-only {
       display: none;
     }
 
@@ -101,6 +104,8 @@
       object-fit: contain; // Ensures image fits without distortion
       position: relative; // Required for animation transforms
       animation: hover 5s linear infinite; // Floating animation (defined below)
+      // Performance optimization for continuously animated elements
+      will-change: transform;
     }
   }
 
@@ -110,7 +115,7 @@
     position: absolute; // Positioned relative to .landing-page
     left: 50%; // Center horizontally
     transform: translateX(-50%); // Perfect horizontal centering
-    bottom: 30px; // 30px from bottom
+    bottom: var(--transform-scroll-bottom); // Position from bottom
     color: var(--main-color); // Uses theme main color
     text-decoration: none; // Remove default link underline
     transition: var(--main-transition); // Smooth color transitions
@@ -124,6 +129,8 @@
     // The double arrow icon bounces to draw attention
     i {
       animation: bounce 1.5s infinite; // Bounce animation (defined below)
+      // Performance optimization for animated elements
+      will-change: transform;
     }
   }
 }
@@ -144,7 +151,7 @@
   }
 
   50% {
-    transform: translateY(-50px); // Middle position (50px up)
+    transform: translateY(var(--transform-float)); // Middle position (floats up)
   }
 }
 
@@ -161,6 +168,6 @@
   }
 
   40%, 60% {
-    transform: translateY(-15px); // Bounce up (brief moment)
+    transform: translateY(var(--transform-bounce)); // Bounce up (brief moment)
   }
 }

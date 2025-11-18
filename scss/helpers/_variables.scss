@@ -1,8 +1,112 @@
-$main-color: #2196f3;
-$main-color-alt: #1787e0;
-$main-transition: 0.3s;
-$main-padding-top: 6.25rem;
-$main-padding-bottom: 6.25rem;
-$section-background: #ececec;
-$main-font: Cairo, sans-serif;
-$nav-bar-font: 1.125rem;
+// ============================================================================
+// Color Variables
+// ============================================================================
+// 
+// All color values used throughout the application are defined here.
+// This centralizes color management and makes theme changes easier.
+// Colors are converted to CSS custom properties in main.scss for runtime access.
+//
+// ============================================================================
+
+// Primary theme colors
+$main-color: #2196f3;        // Primary blue - used for links, buttons, accents
+$main-color-alt: #1787e0;    // Darker blue - used for hover states and emphasis
+$section-background: #ececec; // Light gray - background for alternating sections
+
+// Text Colors
+$text-primary: #333;
+$text-secondary: #777;
+$text-muted: rgb(102, 102, 102);
+$text-black: #000000;
+
+// Background Colors
+$background-white: #ffffff;
+$background-light: #fafafa;
+$section-background-alt: #ECECEC;
+
+// Border Colors
+$border-light: #e6e6e7;
+$border-gray: #e9e6e6;
+
+// Shadow Colors
+$shadow-light: rgb(0 0 0 / 10%);
+$shadow-medium: rgb(0 0 0 / 20%);
+$shadow-nav: rgba(0, 0, 0, 0.1);
+$overlay-white: rgb(255 255 255 / 20%);
+
+// ============================================================================
+// Typography Variables
+// ============================================================================
+// 
+// Font families and sizes used throughout the application.
+// These values ensure consistent typography across all components.
+//
+// ============================================================================
+
+$main-font: Cairo, sans-serif;  // Primary font family for body text
+$nav-bar-font: 1.125rem;        // Font size for navigation bar links (18px)
+
+// ============================================================================
+// Spacing & Layout Variables
+// ============================================================================
+// 
+// Spacing system based on a consistent scale (8px base unit).
+// Using a spacing scale ensures visual harmony and makes it easier to
+// maintain consistent spacing throughout the application.
+//
+// ============================================================================
+
+// Main section padding (top and bottom)
+// Used for consistent vertical spacing between major sections
+$main-padding: 6.25rem; // 100px
+
+// Spacing Scale (based on 0.5rem/8px base unit)
+// Use these for consistent spacing throughout the application
+$spacing-xs: 0.5rem;      // 8px
+$spacing-sm: 0.625rem;    // 10px
+$spacing-md: 1rem;        // 16px
+$spacing-lg: 1.25rem;     // 20px
+$spacing-xl: 1.5rem;      // 24px
+$spacing-2xl: 1.875rem;   // 30px
+$spacing-3xl: 2rem;       // 32px
+$spacing-4xl: 2.5rem;     // 40px
+
+// Specific spacing values (commonly used)
+$spacing-nav-padding: 1.6rem;     // 25.6px - Navigation link padding
+$spacing-nav-padding-mobile: 0.625rem; // 10px - Mobile nav padding
+$spacing-card-padding: 1.25rem;    // 20px - Card content padding
+$spacing-gap-mobile: 1.5rem;      // 24px - Mobile grid gap
+$spacing-gap-tablet: 2rem;        // 32px - Tablet grid gap
+$spacing-gap-desktop: 2.5rem;     // 40px - Desktop grid gap
+
+// Transform values (for animations and positioning)
+$transform-lift: -10px;           // Card hover lift
+$transform-arrow: 10px;            // Arrow animation distance
+$transform-bounce: -15px;         // Bounce animation distance
+$transform-float: -50px;          // Floating animation distance
+$transform-scroll-bottom: 30px;   // Scroll arrow bottom position
+
+// ============================================================================
+// Animation & Transition Variables
+// ============================================================================
+// 
+// Timing values for animations and transitions.
+// Consistent timing creates a cohesive user experience.
+//
+// ============================================================================
+
+$main-transition: 0.3s; // Standard transition duration for hover effects and state changes
+
+// ============================================================================
+// Breakpoint Variables
+// ============================================================================
+// 
+// Responsive breakpoints used throughout the application.
+// These values define the screen widths at which layout changes occur.
+// Used by breakpoint mixins in _mixins.scss for consistent responsive design.
+//
+// ============================================================================
+
+$breakpoint-mobile: 768px;   // Mobile to tablet transition
+$breakpoint-tablet: 992px;   // Tablet to desktop transition
+$breakpoint-desktop: 1200px; // Desktop to large desktop transition

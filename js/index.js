@@ -72,4 +72,96 @@ document.addEventListener('DOMContentLoaded', () => {
       dropDownBtn.classList.remove('nav-bar__nav-link--active');
     }
   });
+
+  // ========================================================================
+  // Section Tracker: Activates nav bar tabs when on it's section
+  // ========================================================================
+  // Skip the hero section and the CTA nav item (first/last) since they do not
+  // participate in the scroll tracking UX.
+  const sections = Array.from(document.querySelectorAll('section')).slice(1);
+  const navLinks = Array.from(document.querySelectorAll('.nav-bar__nav-link')).slice(0, -1);
+  // Build a map from section id -> nav item so the observer callback can look up
+  // the matching tab in constant time without performing DOM queries.
+  const navLinkMap = new Map();
+
+  navLinks.forEach((link) => {
+    const anchor = link.querySelector('a[href^="#"]');
+
+    if (!anchor) return;
+
+    const hash = anchor.getAttribute('href')?.trim();
+
+    if (!hash || hash === '#') return;
+
+    const sectionId = hash.slice(1);
+    navLinkMap.set(sectionId, link);
+  });
+
+  const options = {
+    root: null,
+    rootMargin: "-70px 0px 0px 0px",
+    threshold: 0.6
+  };
+
+  // Track whichever nav item currently carries the active class so we can
+  // remove it immediately without iterating the entire list each time.
+  let currentActiveNavItem =
+    navLinks.find((link) => link.classList.contains('nav-bar__nav-link--active')) ?? null;
+
+  const callBack = (entries, observer) => {
+    entries.forEach((entry) => {
+      // Each entry corresponds to one observed section; grab and sanitize its id.
+      const id = entry.target.id?.trim();
+
+      if (!id) {
+        observer.unobserve(entry.target);
+        console.warn('Section missing id, unobserving:', entry.target);
+        return;
+      }
+
+      // Find the nav item associated with this section id (if any).
+      const targetNavItem = navLinkMap.get(id);
+
+      if (!targetNavItem) {
+        observer.unobserve(entry.target);
+        console.warn(`No navigation link found for section #${id}, unobserving`);
+        return;
+      }
+
+      // When a section exits the viewport, remove the highlight so no tab stays
+      // active while the user is between sections.
+      if (!entry.isIntersecting) {
+        if (currentActiveNavItem === targetNavItem) {
+          currentActiveNavItem.classList.remove('nav-bar__nav-link--active');
+          currentActiveNavItem = null;
+        }
+        return;
+      }
+
+      // If the current section is already highlighted, there is nothing to update.
+      if (currentActiveNavItem === targetNavItem) return;
+
+      // Switch the highlight to whichever section is now intersecting.
+      currentActiveNavItem?.classList.remove('nav-bar__nav-link--active');
+      targetNavItem.classList.add('nav-bar__nav-link--active');
+      currentActiveNavItem = targetNavItem;
+    });
+  };
+
+  const observer = new IntersectionObserver(callBack, options);
+
+  sections.forEach((section) => {
+    const sectionId = section.id?.trim();
+
+    if (!sectionId || !navLinkMap.has(sectionId)) {
+      console.warn(
+        sectionId
+          ? `Skipping observation for #${sectionId} because no nav link references it`
+          : 'Skipping observation for section without an id',
+      );
+      return;
+    }
+
+    observer.observe(section);
+  });
 });

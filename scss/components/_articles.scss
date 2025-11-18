@@ -26,16 +26,17 @@
 // ============================================================================
 
 @use "../helpers/mixins" as *;
+@use "../helpers/variables" as *;
 
 .articles {
   // Main section padding (top)
   // Uses CSS variable for consistent spacing across sections
-  padding-top: var(--main-padding-top);
+  padding-top: var(--main-padding);
 
   // Container wrapper
   // Provides bottom padding to separate from next section
   &__container {
-    padding-bottom: var(--main-padding-bottom);
+    padding-bottom: var(--main-padding);
   }
 
   // Grid container for article cards
@@ -45,28 +46,30 @@
     // Auto-fill creates as many columns as can fit
     // Each column has a minimum width of 200px and can grow to fill available space
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem; // Smaller gap on mobile for better space utilization
+    gap: var(--spacing-gap-mobile); // Smaller gap on mobile for better space utilization
 
     // Responsive gap adjustments
     // Increases spacing on larger screens for better visual separation
-    @media (min-width: 768px) {
-      gap: 2rem;
+    @include respond-to-mobile {
+      gap: var(--spacing-gap-tablet);
     }
 
-    @media (min-width: 992px) {
-      gap: 2.5rem;
+    @include respond-to-tablet {
+      gap: var(--spacing-gap-desktop);
     }
   }
 
   // Individual article card
   // Contains image, text content, and read more link
   &__article {
-    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 15px var(--shadow-light);
     border-radius: 6px;
     overflow: hidden; // Ensures content respects border-radius
     // Smooth transitions for transform and shadow on hover
     transition: transform var(--main-transition), box-shadow var(--main-transition);
-    background-color: #ffffff; // Ensures white background
+    background-color: var(--background-white); // Ensures white background
+    // Performance optimization: hint browser about upcoming transform
+    will-change: transform;
 
     // Focus state for keyboard navigation
     // Provides visual feedback when navigating with keyboard
@@ -78,13 +81,15 @@
     // Hover effects
     // Lifts card and increases shadow for depth effect
     &:hover {
-      transform: translateY(-10px); // Lifts card up
-      box-shadow: 0 2px 15px rgb(0 0 0 / 20%); // Stronger shadow for depth
+      transform: translateY(var(--transform-lift)); // Lifts card up
+      box-shadow: 0 2px 15px var(--shadow-medium); // Stronger shadow for depth
 
       // Animate arrow icon and change link color on hover
       .articles__info {
         i {
           animation: moving-arrow 0.6s linear infinite;
+          // Performance optimization for animated elements
+          will-change: transform;
         }
 
         a {
@@ -98,7 +103,7 @@
   // Ensures images are responsive and properly displayed
   &__image {
     img {
-      max-width: 100%; // Prevents image overflow
+      width: 100%; // Prevents image overflow
       height: auto; // Maintains aspect ratio
       display: block; // Removes bottom spacing (inline-block default spacing)
     }
@@ -107,32 +112,32 @@
   // Text content area
   // Contains article title and description
   &__text {
-    padding: 1.25rem;
+    padding: var(--spacing-card-padding);
 
     // Article title styling
     h3 {
-      margin-bottom: 0.5rem;
-      color: #333; // Dark gray for good contrast
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-primary); // Dark gray for good contrast
       font-weight: 600; // Semi-bold for emphasis
     }
 
     // Article description/paragraph
     p {
-      margin-top: 10px;
+      margin-top: var(--spacing-sm);
       line-height: 1.5; // Comfortable reading line height
-      color: #777; // Lighter gray for secondary text
+      color: var(--text-secondary); // Lighter gray for secondary text
     }
   }
 
   // Footer area with "Read More" link and arrow icon
   // Separated from text content with a border
   &__info {
-    padding: 1.25rem;
+    padding: var(--spacing-card-padding);
     display: flex;
     justify-content: space-between; // Link on left, icon on right
     align-items: center; // Vertically centers content
     color: var(--main-color); // Uses theme color
-    border-top: #e6e6e7 solid 1px; // Subtle separator line
+    border-top: var(--border-light) solid 1px; // Subtle separator line
 
     // "Read More" link styling
     a {
@@ -174,6 +179,6 @@
 // Creates a sliding effect for the arrow icon
 @keyframes moving-arrow {
   100% {
-    transform: translateX(10px); // Moves arrow 10px to the right
+    transform: translateX(var(--transform-arrow)); // Moves arrow to the right
   }
 }

@@ -1,17 +1,99 @@
+// ============================================================================
+// Main Stylesheet
+// ============================================================================
+// 
+// This is the main entry point for all SCSS styles.
+// It imports all component styles and converts SCSS variables to CSS custom
+// properties for runtime access and dynamic theming capabilities.
+//
+// Structure:
+// 1. Import SCSS variables and helpers
+// 2. Import global styles
+// 3. Import component styles
+// 4. Convert SCSS variables to CSS custom properties in :root
+//
+// ============================================================================
+
 @use "./helpers/variables" as *;
 @use "./helpers/global";
 @use "./components/nav-bar";
 @use "./components/landing-page";
 @use "./components/articles";
+@use "./components/gallery";
+
+// ============================================================================
+// CSS Custom Properties (CSS Variables)
+// ============================================================================
+// 
+// Convert SCSS variables to CSS custom properties for:
+// - Runtime access in JavaScript
+// - Dynamic theming capabilities
+// - Browser DevTools inspection
+// - Override capabilities without recompiling
+//
+// All variables are prefixed with -- and can be accessed via var(--variable-name)
+//
+// ============================================================================
 
 :root {
+  // Theme Colors
   --main-color: #{$main-color};
   --main-color-alt: #{$main-color-alt};
-  --main-transition: #{$main-transition};
-  --main-padding-top: #{$main-padding-top};
-  --main-padding-bottom: #{$main-padding-bottom};
   --section-background: #{$section-background};
+  
+  // Text Colors
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-muted: #{$text-muted};
+  --text-black: #{$text-black};
+  
+  // Background Colors
+  --background-white: #{$background-white};
+  --background-light: #{$background-light};
+  
+  // Border Colors
+  --border-light: #{$border-light};
+  --border-gray: #{$border-gray};
+  
+  // Shadow Colors
+  --shadow-light: #{$shadow-light};
+  --shadow-medium: #{$shadow-medium};
+  --shadow-nav: #{$shadow-nav};
+  --overlay-white: #{$overlay-white};
+  
+  // Typography
   --main-font: #{$main-font};
   --nav-bar-font: #{$nav-bar-font};
+  
+  // Spacing & Layout
+  --main-padding: #{$main-padding};
+  
+  // Spacing Scale
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-2xl: #{$spacing-2xl};
+  --spacing-3xl: #{$spacing-3xl};
+  --spacing-4xl: #{$spacing-4xl};
+  
+  // Specific Spacing Values
+  --spacing-nav-padding: #{$spacing-nav-padding};
+  --spacing-nav-padding-mobile: #{$spacing-nav-padding-mobile};
+  --spacing-card-padding: #{$spacing-card-padding};
+  --spacing-gap-mobile: #{$spacing-gap-mobile};
+  --spacing-gap-tablet: #{$spacing-gap-tablet};
+  --spacing-gap-desktop: #{$spacing-gap-desktop};
+  
+  // Transform Values
+  --transform-lift: #{$transform-lift};
+  --transform-arrow: #{$transform-arrow};
+  --transform-bounce: #{$transform-bounce};
+  --transform-float: #{$transform-float};
+  --transform-scroll-bottom: #{$transform-scroll-bottom};
+  
+  // Animation & Transition
+  --main-transition: #{$main-transition};
 }
 

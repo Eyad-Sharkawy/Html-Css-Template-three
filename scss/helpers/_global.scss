@@ -1,10 +1,22 @@
 // ============================================================================
 // Global Styles
 // ============================================================================
+// 
+// This file contains global styles, resets, and utility classes that are
+// used across the entire application. It includes:
+// - CSS reset and normalization
+// - Base typography and body styles
+// - Utility classes (container, header, spikes)
+// - Accessibility features (skip links)
+// - Component-specific animations
+//
+// ============================================================================
 
 @use "./mixins" as *;
 
 // Universal Reset
+// Removes default browser styling for consistent cross-browser appearance
+// Sets box-sizing to inherit (will be set to border-box on html/body)
 *,
 *::before,
 *::after {
@@ -14,6 +26,8 @@
 }
 
 // Base HTML & Body Styles
+// Sets border-box sizing for easier width/height calculations
+// Enables smooth scrolling for anchor link navigation
 html,
 body {
   box-sizing: border-box;
@@ -37,7 +51,7 @@ body {
   top: -100px; // Hide off-screen
   left: 0;
   background-color: var(--main-color);
-  color: #ffffff;
+  color: var(--background-white);
   padding: 1rem 2rem;
   text-decoration: none;
   z-index: 10000; // Above everything
@@ -74,10 +88,85 @@ body {
   }
 }
 
+// Header Utility Class
+// Styled section header with animated hover effect
+// Uses the header mixin for base styles and adds performance optimizations
 .header {
   @include header;
+  
+  // Performance optimization: hints browser about properties that will animate
+  // This allows the browser to optimize rendering for smoother animations
+  // Only applied to pseudo-elements that will be animated on hover
+  &::before,
+  &::after {
+    will-change: width, left, right, border-radius;
+  }
 }
 
+// ============================================================================
+// Header Animations
+// ============================================================================
+// Component-specific animations for the header utility class
+// These animations create a sliding effect from both sides when header is hovered
+
+// Left-side animation: slides in from left and expands to fill half/whole width
+// Animation stages:
+// - 50%: Circle reaches left edge, maintains circular shape
+// - 90%: Expands to 50% width, loses border-radius
+// - 100%: Expands to full width, creating background fill effect
+@keyframes left-move {
+  50% {
+    left: 0;
+    width: 12px;
+    height: 12px;
+  }
+
+  90% {
+    left: 0;
+    border-radius: 0;
+    width: 50%;
+    height: 100%;
+  }
+
+  100% {
+    left: 0;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Right-side animation: slides in from right and expands to fill half width
+// Note: Right side only expands to 50% to meet the left side at center
+// Animation stages:
+// - 50%: Circle reaches right edge, maintains circular shape
+// - 90%: Expands to 50% width, loses border-radius
+// - 100%: Stays at 50% width (meets left side at center)
+@keyframes right-move {
+  50% {
+    right: 0;
+    width: 12px;
+    height: 12px;
+  }
+
+  90% {
+    right: 0;
+    border-radius: 0;
+    width: 50%;
+    height: 100%;
+  }
+
+  100% {
+    right: 0;
+    border-radius: 0;
+    width: 50%;
+    height: 100%;
+  }
+}
+
+// Spikes Utility Class
+// Creates a decorative spiked border effect using CSS gradients
+// Typically used at the bottom of sections for visual separation
 .spikes {
   @include spikes;
 }

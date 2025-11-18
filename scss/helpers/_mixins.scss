@@ -1,16 +1,90 @@
 // ============================================================================
 // Mixins
 // ============================================================================
+// 
+// Reusable SCSS mixins for common patterns and responsive design.
+// Mixins help maintain consistency and reduce code duplication.
+//
+// Categories:
+// - Responsive breakpoint mixins (mobile-first approach)
+// - Component mixins (header, spikes)
+//
+// ============================================================================
 
-// Note: This file is reserved for reusable mixins that can be shared across
-// multiple components. Currently empty but available for future use.
+@use "./variables" as *;
 
+// ============================================================================
+// Responsive Breakpoint Mixins
+// ============================================================================
+// 
+// Mobile-first responsive design mixins.
+// Use these instead of writing media queries directly for consistency.
+//
+// Usage:
+//   @include respond-to-mobile { ... }  // Styles for 768px and up
+//   @include mobile-only { ... }       // Styles for 767px and below
+//
+// ============================================================================
+
+// Mobile and up (768px+)
+// Use for styles that should apply from tablet size and larger
+@mixin respond-to-mobile {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+// Tablet and up (992px+)
+// Use for styles that should apply from desktop size and larger
+@mixin respond-to-tablet {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+// Desktop and up (1200px+)
+// Use for styles that should apply only on large screens
+@mixin respond-to-desktop {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+// Mobile only (max 767px)
+// Use for styles that should apply only on small screens
+@mixin mobile-only {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+// Tablet only (768px - 991px)
+// Use for styles that should apply only on medium screens
+@mixin tablet-only {
+  @media (min-width: 768px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+// ============================================================================
+// Component Mixins
+// ============================================================================
+// 
+// Reusable component styles that can be applied via mixins.
+// These provide consistent styling patterns across the application.
+//
+// ============================================================================
+
+// Header Mixin
+// Creates a styled section header with decorative circles on both sides.
+// On hover, the circles animate to fill the header background.
+// Used by the .header utility class in _global.scss
 @mixin header {
   text-transform: uppercase;
   width: fit-content;
   margin: 0 auto 5rem;
   padding: 0.625rem 1.25rem;
-  border: black 2px solid;
+  border: $text-black 2px solid;
   font-size: 1.2rem;
   position: relative;
   z-index: 1;
@@ -38,7 +112,7 @@
   }
 
   &:hover {
-    color: #ffffff;
+    color: $background-white;
     transition-delay: 0.5s;
 
     &::before {
@@ -49,38 +123,13 @@
       animation: right-move 0.5s linear forwards;
     }
   }
-
-  @keyframes left-move {
-    50% {
-      left: 0;
-      width: 12px;
-      height: 12px;
-    }
-
-    100% {
-      left: 0;
-      border-radius: 0;
-      width: 50%;
-      height: 100%;
-    }
-  }
-
-  @keyframes right-move {
-    50% {
-      right: 0;
-      width: 12px;
-      height: 12px;
-    }
-
-    100% {
-      right: 0;
-      border-radius: 0;
-      width: 50%;
-      height: 100%;
-    }
-  }
 }
 
+// Spikes Mixin
+// Creates a decorative spiked border effect using CSS gradients.
+// The spikes appear at the bottom of the element, creating a visual separator.
+// Uses two linear gradients at 135deg and 225deg to create triangular shapes.
+// Used by the .spikes utility class in _global.scss
 @mixin spikes {
   position: relative;
 
@@ -89,9 +138,11 @@
     position: absolute;
     right: 0;
     width: 100%;
-    height: 30px;
+    height: 30px; // Height of the spike pattern
     z-index: 1;
-    background-image: linear-gradient(135deg, white 25%, transparent 25%), linear-gradient(225deg, white 25%, transparent 25%);
-    background-size: 30px 30px;
+    // Two gradients create triangular spikes pointing downward
+    // 135deg creates left-facing triangles, 225deg creates right-facing triangles
+    background-image: linear-gradient(135deg, var(--background-white) 25%, transparent 25%), linear-gradient(225deg, var(--background-white) 25%, transparent 25%);
+    background-size: 30px 30px; // Size of each spike pattern unit
   }
 }

@@ -1,0 +1,106 @@
+// ============================================================================
+// Gallery Component Styles
+// ============================================================================
+// 
+// Styles for the gallery section displaying a grid of image cards.
+// Each card has a hover effect that rotates and scales the image with
+// a flashing overlay animation.
+//
+// Features:
+// - Responsive grid layout (auto-fit with minimum column width)
+// - Image hover effects (rotate, scale, flash overlay)
+// - Performance-optimized animations
+//
+// ============================================================================
+
+@use "../helpers/variables" as *;
+
+.gallery{
+  background: var(--section-background);
+  padding: var(--main-padding) 0;
+
+  // Grid container for gallery items
+  // Uses auto-fit to create as many columns as can fit
+  // Each column has a minimum width of 18.75rem (300px)
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-4xl);
+  }
+
+  // Individual gallery card container
+  // White background with padding, overflow hidden to contain image transforms
+  &__cards {
+    padding: var(--spacing-md);
+    background: var(--background-white);
+    overflow: hidden; // Clips rotated/scaled images on hover
+  }
+
+  // Image container with hover effects
+  &__image{
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--main-transition);
+      // Performance optimization: hints browser about upcoming transform
+      // Improves animation smoothness by allowing browser to optimize rendering
+      will-change: transform;
+    }
+
+    // Flash overlay effect (hidden by default, animated on hover)
+    // Starts as a small centered circle, expands to cover entire image
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); // Centers the overlay
+      background-color: var(--overlay-white); // Semi-transparent white
+      width: 0;
+      height: 0;
+      opacity: 0;
+      z-index: 2; // Above the image
+    }
+    
+    // Hover state: applies multiple effects simultaneously
+    &:hover {
+      // Rotate and scale image for dynamic effect
+      img {
+        transform: rotate(5deg) scale(1.1); // 5 degree rotation, 10% scale up
+      }
+
+      // Trigger flash overlay animation
+      &::before {
+        animation: flashing 0.7s;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// Gallery Animations
+// ============================================================================
+
+// Flashing overlay animation
+// Creates a "flash" effect that expands from center and fades out
+// Used on gallery image hover to add visual interest
+@keyframes flashing {
+  // Start and early stage: visible and centered
+  0%, 40% {
+    opacity: 1;
+  }
+
+  // End: fully expanded and transparent
+  // 200% size ensures it covers the entire image even when rotated/scaled
+  100% {
+    opacity: 0;
+    width: 200%;
+    height: 200%;
+  }
+}
