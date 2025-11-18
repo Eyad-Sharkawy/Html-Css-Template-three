@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const options = {
     root: null,
     rootMargin: "-70px 0px 0px 0px",
-    threshold: 0.6
+    threshold: 0.1
   };
 
   // Track whichever nav item currently carries the active class so we can
