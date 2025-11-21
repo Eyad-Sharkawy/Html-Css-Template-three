@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================================================
   // Skip the hero section and the CTA nav item (first/last) since they do not
   // participate in the scroll tracking UX.
-  const sections = Array.from(document.querySelectorAll('section')).slice(1);
+  const sections = Array.from(document.querySelectorAll('section')).slice(1, 4);
   const navLinks = Array.from(document.querySelectorAll('.nav-bar__nav-link')).slice(0, -1);
   // Build a map from section id -> nav item so the observer callback can look up
   // the matching tab in constant time without performing DOM queries.

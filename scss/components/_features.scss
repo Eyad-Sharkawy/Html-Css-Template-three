@@ -1,0 +1,264 @@
+// ============================================================================
+// Features Component
+// ============================================================================
+// 
+// Displays a grid of feature cards with images, titles, descriptions, and
+// interactive buttons. Each feature has a unique color theme (quality, time, passion).
+//
+// Features:
+// - Responsive grid layout (auto-fit with minimum width)
+// - Animated triangle overlay that reveals image on hover
+// - Color-coded feature variants using CSS custom properties
+// - Accessible focus states for keyboard navigation
+// - Smooth transitions for interactive elements
+//
+// Structure:
+// - .features: Main container
+//   - .features__list: Grid container for feature items
+//     - .features__item: Individual feature card wrapper
+//       - .features__feature: Feature content container
+//         - .features__image: Image container with overlay effects
+//         - .features__text: Text content (title and description)
+//         - .features__more-btn: Call-to-action button
+//
+// ============================================================================
+
+@use "../helpers/variables" as *;
+@use "../helpers/mixins" as *;
+
+// Feature variant names used to generate modifier classes
+$features: "quality", "time", "passion";
+
+.features {
+  padding: var(--main-padding) 0;
+
+  // ========================================================================
+  // Features List: Responsive Grid Layout
+  // ========================================================================
+  // 
+  // Creates a responsive grid that automatically adjusts the number of columns
+  // based on available space. Each card has a minimum width of 18.75rem (300px).
+  // Gap spacing increases at larger breakpoints for better visual hierarchy.
+  //
+  // ========================================================================
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    gap: var(--spacing-gap-mobile);
+
+    @include respond-to-mobile {
+      gap: var(--spacing-gap-tablet);
+    }
+
+    @include respond-to-tablet {
+      gap: var(--spacing-gap-desktop);
+    }
+  }
+
+  // ========================================================================
+  // Feature Item: Card Container
+  // ========================================================================
+  // 
+  // Wrapper for each feature card. Provides border styling and hover effects.
+  // Includes focus-within states for keyboard accessibility.
+  //
+  // ========================================================================
+  &__item {
+    border: 1px solid var(--border-dark-gray);
+
+    // Generate focus states for each feature variant
+    // Provides visible outline when keyboard navigating through features
+    @each $feature in $features {
+      &--#{$feature}:focus-within {
+        outline: 3px solid var(--#{$feature}-color);
+        outline-offset: 2px;
+      }
+    }
+
+    // ====================================================================
+    // Hover Effects
+    // ====================================================================
+    // 
+    // On hover:
+    // - Triangle overlay moves upward to reveal more of the image
+    // - Button text changes to white and background fills with feature color
+    //
+    // ====================================================================
+    &:hover {
+      .features__image::after {
+        // Move triangle top point from 90% to 50% (reveals more image)
+        clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+      }
+
+      .features__more-btn {
+        color: white;
+
+        &::before {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  // ========================================================================
+  // Feature Content: Flex Container
+  // ========================================================================
+  // 
+  // Centers all content vertically and horizontally within each feature card.
+  //
+  // ========================================================================
+  &__feature {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // ========================================================================
+  // Feature Image: Stacked Overlay Effect
+  // ========================================================================
+  // 
+  // Uses CSS Grid to stack multiple layers:
+  // 1. Base image (bottom layer)
+  // 2. Colored overlay (::before) - semi-transparent feature color
+  // 3. White triangle overlay (::after) - animated reveal effect
+  //
+  // The triangle overlay starts at 90% from top and moves to 50% on hover,
+  // creating a smooth upward reveal animation.
+  //
+  // ========================================================================
+  &__image {
+    display: grid;
+    grid-template-areas: "stack";
+
+    img {
+      grid-area: stack;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    // Colored overlay layer - applies feature-specific color with opacity
+    &::before {
+      content: "";
+      grid-area: stack;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+    }
+
+    // White triangle overlay - animated reveal effect
+    // Initial state: triangle covers bottom portion (top point at 90%)
+    // Hover state: triangle moves up (top point at 50%), revealing image
+    &::after {
+      content: "";
+      grid-area: stack;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      // Triangle shape: bottom-left corner, bottom-right corner, top point
+      clip-path: polygon(0 100%, 100% 100%, 50% 90%);
+      z-index: 1;
+      transition: clip-path var(--main-transition) linear;
+    }
+
+    // Apply feature-specific color to overlay
+    @each $feature in $features {
+      &--#{$feature}::before {
+        background-color: var(--#{$feature}-color);
+      }
+    }
+  }
+
+  // ========================================================================
+  // Feature Text: Title and Description
+  // ========================================================================
+  // 
+  // Contains the feature title (h3) and description (p).
+  // Title includes a decorative underline that uses the feature color.
+  //
+  // ========================================================================
+  &__text {
+    h3 {
+      font-size: 2.5rem;
+      margin: 0 auto;
+      width: fit-content;
+      position: relative;
+
+      // Decorative underline - positioned below title
+      &::after {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 5px;
+        left: 50%;
+        bottom: -1rem;
+        transform: translateX(-50%);
+      }
+    }
+
+    p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 2;
+      padding: var(--spacing-lg);
+      margin: var(--spacing-2xl) 0;
+    }
+
+    // Apply feature-specific color to title underline
+    @each $feature in $features {
+      &--#{$feature} h3::after {
+        background-color: var(--#{$feature}-color);
+      }
+    }
+  }
+
+  // ========================================================================
+  // More Button: Call-to-Action
+  // ========================================================================
+  // 
+  // Interactive button with animated fill effect on hover.
+  // Uses ::before pseudo-element to create a sliding background fill.
+  // Button border and text color match the feature's theme color.
+  //
+  // Animation:
+  // - Default: Transparent background, colored border and text
+  // - Hover: Background fills from left to right, text changes to white
+  //
+  // ========================================================================
+  &__more-btn {
+    padding: var(--spacing-sm) var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
+    font-size: 1.375rem;
+    font-weight: bold;
+    background-color: transparent;
+    border-radius: 6px;
+    position: relative;
+    transition: color var(--main-transition);
+
+    // Animated background fill - starts at 0 width, expands on hover
+    &::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: width var(--main-transition);
+    }
+
+    // Apply feature-specific styling (border, text color, background)
+    @each $feature in $features {
+      &--#{$feature} {
+        border: 3px solid var(--#{$feature}-color);
+        color: var(--#{$feature}-color);
+
+        &::before {
+          background-color: var(--#{$feature}-color);
+        }
+      }
+    }
+  }
+}

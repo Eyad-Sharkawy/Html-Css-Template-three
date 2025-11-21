@@ -20,6 +20,7 @@
 @use "./components/landing-page";
 @use "./components/articles";
 @use "./components/gallery";
+@use "./components/features";
 
 // ============================================================================
 // CSS Custom Properties (CSS Variables)
@@ -54,12 +55,18 @@
   // Border Colors
   --border-light: #{$border-light};
   --border-gray: #{$border-gray};
+  --border-dark-gray: #{$border-dark-gray};
   
   // Shadow Colors
   --shadow-light: #{$shadow-light};
   --shadow-medium: #{$shadow-medium};
   --shadow-nav: #{$shadow-nav};
   --overlay-white: #{$overlay-white};
+
+  // Features Color
+  --quality-color: #{$quality-color};
+  --time-color: #{$time-color};
+  --passion-color: #{$passion-color};
   
   // Typography
   --main-font: #{$main-font};
