@@ -1,0 +1,67 @@
+@use "../helpers/variables" as *;
+@use "../helpers/mixins" as *;
+
+.testimonials {
+  padding: var(--main-padding) 0;
+  background-color: var(--section-background);
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: calc(var(--spacing-gap-mobile));
+
+    @include respond-to-mobile {
+      gap: calc(var(--spacing-gap-tablet));
+    }
+
+    @include respond-to-tablet {
+      gap: calc(var(--spacing-gap-desktop));
+    }
+  }
+
+  &__testimonial {
+    background-color: var(--background-white);
+    border-radius: 6px;
+    padding: var(--spacing-lg);
+    position: relative;
+  }
+
+  &__image {
+    position: absolute;
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 50%;
+    border: var(--section-background) solid 10px;
+    top: -50px;
+    right: -10px;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 50%;
+    }
+  }
+
+  &__name {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &__title {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &__rating {
+    margin-bottom: var(--spacing-sm);
+
+    i.filled {
+      color: #FFC107;
+    }
+  }
+
+  &__text {
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+}
