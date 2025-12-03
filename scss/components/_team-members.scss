@@ -1,0 +1,108 @@
+@use "../helpers/mixins" as *;
+
+.team-members {
+  padding: var(--main-padding) 0;
+  position: relative;
+
+  &__members {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-gap-mobile);
+
+    @include respond-to-mobile {
+      gap: var(--spacing-gap-tablet);
+    }
+
+    @include respond-to-tablet {
+      gap: var(--spacing-gap-desktop);
+    }
+  }
+
+  &__member {
+
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      background-color: var(--section-background);
+      width: calc(100% - var(--spacing-4xl));
+      top: 0;
+      right: 0;
+      z-index: -1;
+      border-radius: 10px;
+
+    }
+
+
+    &::after {
+      background-color: var(--section-background-muted);
+      width: 0;
+      transition: width var(--main-transition) linear;
+    }
+
+    &:hover {
+
+      &::after {
+        width: calc(100% - var(--spacing-4xl));
+      }
+
+      img {
+        filter: grayscale(100%);
+      }
+
+      h3 {
+        color: var(--text-muted);
+      }
+    }
+  }
+
+  &__image {
+    padding-top: var(--spacing-team-members-card-top-margin);
+    display: flex;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      transition: var(--main-transition);
+    }
+  }
+
+  &__caption {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-lg);
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: var(--main-transition);
+
+      &:hover {
+        color: var(--main-color);
+      }
+    }
+  }
+
+  &__content {
+    padding: var(--spacing-xl) 0;
+    padding-left: var(--spacing-team-members-card-text-margin);
+
+    h3 {
+      color: var(--main-color);
+      font-size: var(--team-members-names-font);
+      transition: var(--main-transition);
+    }
+
+    p {
+      margin-top: var(--spacing-sm);
+    }
+  }
+}

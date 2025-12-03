@@ -22,6 +22,7 @@
 @use "./components/gallery";
 @use "./components/features";
 @use "./components/testimonials";
+@use "./components/team-members";
 
 // ============================================================================
 // CSS Custom Properties (CSS Variables)
@@ -52,6 +53,7 @@
   // Background Colors
   --background-white: #{$background-white};
   --background-light: #{$background-light};
+  --section-background-muted: #{$section-background-muted};
   
   // Border Colors
   --border-light: #{$border-light};
@@ -72,6 +74,7 @@
   // Typography
   --main-font: #{$main-font};
   --nav-bar-font: #{$nav-bar-font};
+  --team-members-names-font: #{$team-members-names-font};
   
   // Spacing & Layout
   --main-padding: #{$main-padding};
@@ -93,6 +96,8 @@
   --spacing-gap-mobile: #{$spacing-gap-mobile};
   --spacing-gap-tablet: #{$spacing-gap-tablet};
   --spacing-gap-desktop: #{$spacing-gap-desktop};
+  --spacing-team-members-card-top-margin: #{$spacing-team-members-card-top-margin};
+  --spacing-team-members-card-text-margin: #{$spacing-team-members-card-text-padding};
   
   // Transform Values
   --transform-lift: #{$transform-lift};

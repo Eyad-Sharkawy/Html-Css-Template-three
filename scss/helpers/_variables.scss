@@ -23,6 +23,7 @@ $text-black: #000000;
 $background-white: #ffffff;
 $background-light: #fafafa;
 $section-background-alt: #ECECEC;
+$section-background-muted: #E4E4E4;
 
 // Border Colors
 $border-light: #e6e6e7;
@@ -51,6 +52,7 @@ $passion-color: #03A9F4;
 
 $main-font: Cairo, sans-serif;  // Primary font family for body text
 $nav-bar-font: 1.125rem;        // Font size for navigation bar links (18px)
+$team-members-names-font: 1.375rem;
 
 // ============================================================================
 // Spacing & Layout Variables
@@ -84,6 +86,8 @@ $spacing-card-padding: 1.25rem;    // 20px - Card content padding
 $spacing-gap-mobile: 1.5rem;      // 24px - Mobile grid gap
 $spacing-gap-tablet: 2rem;        // 32px - Tablet grid gap
 $spacing-gap-desktop: 2.5rem;     // 40px - Desktop grid gap
+$spacing-team-members-card-top-margin: 3.75rem;
+$spacing-team-members-card-text-padding: 5rem;
 
 // Transform values (for animations and positioning)
 $transform-lift: -10px;           // Card hover lift
