@@ -24,6 +24,13 @@
     border-radius: 6px;
     padding: var(--spacing-lg);
     position: relative;
+    box-shadow: 0 12px 20px 0 var(--shadow-light);
+    transition: transform linear var(--main-transition), boxshadow linear var(--main-transition);
+
+    &:hover {
+      transform: translateY(var(--transform-lift)); // Lifts card up
+      box-shadow: 0 2px 15px var(--shadow-medium); // Stronger shadow for depth
+    }
   }
 
   &__image {
