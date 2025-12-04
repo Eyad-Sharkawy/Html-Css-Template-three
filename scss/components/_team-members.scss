@@ -2,7 +2,6 @@
 
 .team-members {
   padding: var(--main-padding) 0;
-  position: relative;
 
   &__members {
     display: grid;
@@ -97,7 +96,7 @@
 
     h3 {
       color: var(--main-color);
-      font-size: var(--team-members-names-font);
+      font-size: var(--font-size-xl);
       transition: var(--main-transition);
     }
 

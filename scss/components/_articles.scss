@@ -29,15 +29,9 @@
 @use "../helpers/variables" as *;
 
 .articles {
-  // Main section padding (top)
+  // Main section padding (top and bottom)
   // Uses CSS variable for consistent spacing across sections
-  padding-top: var(--main-padding);
-
-  // Container wrapper
-  // Provides bottom padding to separate from next section
-  &__container {
-    padding-bottom: var(--main-padding);
-  }
+  padding: var(--main-padding) 0;
 
   // Grid container for article cards
   // Uses CSS Grid with auto-fill for responsive layout
