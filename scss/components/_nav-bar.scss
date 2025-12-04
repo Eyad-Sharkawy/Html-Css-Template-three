@@ -42,7 +42,7 @@
   // Navigation Menu Link Item
   // Used for all main navigation links (Articles, Gallery, Features, Other Links)
   &__nav-link {
-    font-size: var(--nav-bar-font);
+    font-size: var(--font-size-lg);
     position: relative; // Needed for ::before pseudo-element positioning
     display: flex;
     align-items: center;
@@ -187,7 +187,7 @@
   &__hamburger-link {
     position: relative; // Needed for ::before pseudo-element
     padding: var(--spacing-md);
-    font-size: var(--nav-bar-font);
+    font-size: var(--font-size-lg);
     font-weight: bold;
     border-bottom: 1px solid var(--border-gray); // Separator between items
 

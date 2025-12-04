@@ -23,6 +23,7 @@
 @use "./components/features";
 @use "./components/testimonials";
 @use "./components/team-members";
+@use "./components/services";
 
 // ============================================================================
 // CSS Custom Properties (CSS Variables)
@@ -70,11 +71,22 @@
   --quality-color: #{$quality-color};
   --time-color: #{$time-color};
   --passion-color: #{$passion-color};
+
+  // Services Color
+  --service-icon-color: #{$service-icon-color};
+  --service-info-color: #{$service-info-color};
+  --service-info-color-alt: #{$service-info-color-alt};
   
   // Typography
   --main-font: #{$main-font};
-  --nav-bar-font: #{$nav-bar-font};
-  --team-members-names-font: #{$team-members-names-font};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-md: #{$font-size-md};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
   
   // Spacing & Layout
   --main-padding: #{$main-padding};
