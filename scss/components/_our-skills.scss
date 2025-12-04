@@ -1,0 +1,66 @@
+@use "../helpers/mixins" as *;
+
+.our-skills {
+  padding: var(--main-padding) 0;
+
+  &__content {
+    display: flex;
+    align-items: center;
+
+    &--active {
+      $skills: (html, 80%), (css, 85%), (js, 70%), (python, 80%);
+
+      @each $name, $percentage in $skills {
+        .our-skills__skill-bar--#{$name} span {
+          width: #{$percentage};
+        }
+      }
+    }
+  }
+
+  &__list {
+    flex: 1;
+  }
+
+  &__image {
+    display: none;
+
+    @include respond-to-tablet {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+
+  &__skill-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--spacing-md) 0;
+
+    span {
+      color: var(--main-color);
+      font-size: 12px;
+      padding: 3px 5px;
+      border-radius: 4px;
+      border: var(--border-light) solid 1px;
+    }
+  }
+
+  &__skill-bar {
+    background-color: var(--background-light-gray);
+
+    span {
+      background-color: var(--main-color);
+      height: 1.875rem;
+      display: block;
+      width: 0;
+      transition: width linear var(--main-transition);
+    }
+
+  }
+}

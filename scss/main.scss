@@ -24,6 +24,7 @@
 @use "./components/testimonials";
 @use "./components/team-members";
 @use "./components/services";
+@use "./components/our-skills";
 
 // ============================================================================
 // CSS Custom Properties (CSS Variables)
@@ -55,6 +56,7 @@
   --background-white: #{$background-white};
   --background-light: #{$background-light};
   --section-background-muted: #{$section-background-muted};
+  --background-light-gray: #{$background-light-gray};
   
   // Border Colors
   --border-light: #{$border-light};

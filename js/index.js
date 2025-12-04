@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinkMap.set(sectionId, link);
   });
 
-  const options = {
+  const sectionObserverOptions = {
     root: null,
     rootMargin: "-70px 0px 0px 0px",
     threshold: 0.1
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentActiveNavItem =
     navLinks.find((link) => link.classList.contains('nav-bar__nav-link--active')) ?? null;
 
-  const callBack = (entries, observer) => {
+  const sectionObserverCallBack = (entries, observer) => {
     entries.forEach((entry) => {
       // Each entry corresponds to one observed section; grab and sanitize its id.
       const id = entry.target.id?.trim();
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const observer = new IntersectionObserver(callBack, options);
+  const sectionObserver = new IntersectionObserver(sectionObserverCallBack, sectionObserverOptions);
 
   sections.forEach((section) => {
     const sectionId = section.id?.trim();
@@ -162,6 +162,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    observer.observe(section);
+    sectionObserver.observe(section);
   });
+
+  const skillsSection = document.querySelector("#our-skills")
+  const skillsBar = document.querySelector(".our-skills__content")
+
+  const skillsObserverCallBack = (entries, observer) => {
+    skillsBar.classList.toggle("our-skills__content--active", entries[0].isIntersecting)
+  }
+
+  const skillsObserverOptions = {
+    root: null,
+    rootMargin: "0px 0px 0px 0px",
+    threshold: 0.7
+  };
+
+  const skillsObserver = new IntersectionObserver(skillsObserverCallBack, skillsObserverOptions);
+
+  skillsObserver.observe(skillsSection);
 });
