@@ -146,3 +146,28 @@
     background-size: 30px 30px; // Size of each spike pattern unit
   }
 }
+
+@mixin overlay-flash {
+  position: relative; // Required for absolute positioning of ::before overlay
+
+
+  // Flash overlay effect (hidden by default, animated on hover)
+  // Starts as a small centered circle, expands to cover entire image
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // Centers the overlay
+    background-color: var(--overlay-white); // Semi-transparent white
+    width: 0;
+    height: 0;
+    opacity: 0;
+    z-index: 2; // Above the image
+  }
+
+  // Hover state: Trigger flash overlay animation
+  &:hover::before {
+    animation: flashing 0.7s;
+  }
+}
